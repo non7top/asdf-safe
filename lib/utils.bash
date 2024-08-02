@@ -7,6 +7,11 @@ GH_REPO="https://github.com/Qarik-Group/safe"
 TOOL_NAME="safe"
 TOOL_TEST="safe --version"
 
+[ "Linux" = "$(uname)" ] && platform="linux" || platform="darwin"
+[ "x86_64" = "$(uname -m)" ] && arch="amd64" || arch="386"
+[ "aarch64" = "$(uname -m)" ] && arch="arm64"
+[ "arm64" = "$(uname -m)" ] && arch="arm64"
+
 fail() {
 	echo -e "asdf-$TOOL_NAME: $*"
 	exit 1
@@ -42,7 +47,7 @@ download_release() {
 	filename="$2"
 
 	# TODO: Adapt the release URL convention for safe
-	url="$GH_REPO/archive/v${version}.tar.gz"
+	url="$GH_REPO/releases/download/v$version/$TOOL_NAME-$platform-$arch"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
