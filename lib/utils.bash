@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for safe.
 GH_REPO="https://github.com/Qarik-Group/safe"
 TOOL_NAME="safe"
 TOOL_TEST="safe --version"
@@ -46,7 +45,6 @@ download_release() {
 	version="$1"
 	filename="$2"
 
-	# TODO: Adapt the release URL convention for safe
 	url="$GH_REPO/releases/download/v$version/$TOOL_NAME-$platform-$arch"
 
 	echo "* Downloading $TOOL_NAME release $version..."
@@ -66,7 +64,6 @@ install_version() {
 		mkdir -p "$install_path"
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
-		# TODO: Assert safe executable exists.
 		local tool_cmd
 		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
 		test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
