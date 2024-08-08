@@ -14,5 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: GoogleCloudPlatform/release-please-action@v4
+        if: ${{ !env.ACT }}
         with:
           release-type: simple
