@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-GH_REPO="https://github.com/Qarik-Group/safe"
+GH_REPO="https://github.com/egen/safe"
 TOOL_NAME="safe"
 TOOL_TEST="safe --version"
 
