@@ -45,6 +45,21 @@ download_release() {
 	version="$1"
 	filename="$2"
 
+	# Handle the special case of "latest" version
+	if [ "$version" = "latest" ]; then
+		# Get the actual latest version number
+		version=$(
+			curl -sI "$GH_REPO/releases/latest" \
+			| sed -n -e "s|^location: *||p" \
+			| sed -n -e "s|\r||p" \
+			| sed 's|.*/tag/v\{0,1\}||'
+		)
+		if [ -z "$version" ]; then
+			fail "Could not determine latest version of $TOOL_NAME"
+		fi
+		echo "* Resolved 'latest' to version '$version'"
+	fi
+
 	url="$GH_REPO/releases/download/v$version/$TOOL_NAME-$platform-$arch"
 
 	echo "* Downloading $TOOL_NAME release $version..."
