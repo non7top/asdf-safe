@@ -49,10 +49,10 @@ download_release() {
 	if [ "$version" = "latest" ]; then
 		# Get the actual latest version number
 		version=$(
-			curl -sI "$GH_REPO/releases/latest" \
-			| sed -n -e "s|^location: *||p" \
-			| sed -n -e "s|\r||p" \
-			| sed 's|.*/tag/v\{0,1\}||'
+			curl -sI "$GH_REPO/releases/latest" |
+				sed -n -e "s|^location: *||p" |
+				sed -n -e "s|\r||p" |
+				sed 's|.*/tag/v\{0,1\}||'
 		)
 		if [ -z "$version" ]; then
 			fail "Could not determine latest version of $TOOL_NAME"
