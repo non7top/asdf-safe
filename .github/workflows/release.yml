@@ -8,12 +8,13 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: GoogleCloudPlatform/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         if: ${{ !env.ACT }}
         with:
           release-type: simple
